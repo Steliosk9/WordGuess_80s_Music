@@ -59,4 +59,52 @@ var wordGuessGame = {
         preview: "https://p.scdn.co/mp3-preview/ed5a443bc86176135ebca8a114f66f4d814d4c90"
       }
     },
-  
+
+    wordInPlay: null,
+    lettersOfTheWord: [],
+    matchedLetters: [],
+    guessedLetters: [],
+    guessesLeft: 0,
+    totalGuesses: 0,
+    letterGuessed: null,
+    wins: 0,
+
+      // The setupGame method is called when the page first loads.
+  setupGame: function() {
+    // Here we pick a random word.
+    var objKeys = Object.keys(this.wordsToPick);
+    this.wordInPlay = objKeys[Math.floor(Math.random() * objKeys.length)];
+
+    // Split the chosen word up into its individual letters.
+    this.lettersOfTheWord = this.wordInPlay.split("");
+    // Builds the representation of the word we are trying to guess and displays it on the page.
+    // At the start it will be all underscores since we haven't guessed any letters ("_ _ _ _").
+    this.rebuildWordView();
+    // This function sets the number of guesses the user gets, and renders it to the HTML.
+    this.processUpdateTotalGuesses();
+  },
+
+    // This function is run whenever the user guesses a letter..
+    updatePage: function(letter) {
+        // If the user has no guesses left, restart the game.
+        if (this.guessesLeft === 0) {
+          this.restartGame();
+        }
+        // Otherwise...
+        else {
+          // Check for and handle incorrect guesses.
+          this.updateGuesses(letter);
+    
+          // Check for and handle correct guesses.
+          this.updateMatchedLetters(letter);
+    
+          // Rebuild the view of the word. Guessed letters are revealed, non-guessed letters have a "_".
+          this.rebuildWordView();
+    
+          // If the user wins, restart the game.
+          if (this.updateWins() === true) {
+            this.restartGame();
+          }
+        }
+    
+      },
