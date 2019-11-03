@@ -106,5 +106,22 @@ var wordGuessGame = {
             this.restartGame();
           }
         }
-    
       },
+
+      // This function governs what happens when the user makes an incorrect guess (that they haven't guessed before).
+  updateGuesses: function(letter) {
+    // If the letter is not in the guessedLetters array, and the letter is not in the lettersOfTheWord array..
+    if ((this.guessedLetters.indexOf(letter) === -1) && (this.lettersOfTheWord.indexOf(letter) === -1)) {
+
+      // Add the letter to the guessedLetters array.
+      this.guessedLetters.push(letter);
+
+      // Decrease guesses by one.
+      this.guessesLeft--;
+
+      // Update guesses remaining and guesses letters on the page.
+      document.querySelector("#guesses-remaining").innerHTML = this.guessesLeft;
+      document.querySelector("#guessed-letters").innerHTML =
+      this.guessedLetters.join(", ");
+    }
+  },
