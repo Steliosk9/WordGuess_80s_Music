@@ -135,4 +135,15 @@ var wordGuessGame = {
     // Render the guesses left to the page.
     document.querySelector("#guesses-remaining").innerHTML = this.guessesLeft;
   },
-
+  
+// This function governs what happens if the user makes a successful guess.
+updateMatchedLetters: function(letter) {
+  // Loop through the letters of the "solution".
+  for (var i = 0; i < this.lettersOfTheWord.length; i++) {
+    // If the guessed letter is in the solution, and we haven't guessed it already..
+    if ((letter === this.lettersOfTheWord[i]) && (this.matchedLetters.indexOf(letter) === -1)) {
+      // Push the newly guessed letter into the matchedLetters array.
+      this.matchedLetters.push(letter);
+    }
+  }
+},
