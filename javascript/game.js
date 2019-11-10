@@ -168,3 +168,18 @@ updateMatchedLetters: function(letter) {
     // Update the page with the new string we built.
     document.querySelector("#current-word").innerHTML = wordView;
   },
+
+  
+  // Function that "restarts" the game by resetting all of the variables.
+  restartGame: function() {
+    document.querySelector("#guessed-letters").innerHTML = "";
+    this.wordInPlay = null;
+    this.lettersOfTheWord = [];
+    this.matchedLetters = [];
+    this.guessedLetters = [];
+    this.guessesLeft = 0;
+    this.totalGuesses = 0;
+    this.letterGuessed = null;
+    this.setupGame();
+    this.rebuildWordView();
+  },
