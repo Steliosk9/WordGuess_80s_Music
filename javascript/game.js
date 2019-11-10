@@ -1,7 +1,5 @@
-// Creating a giant wordGuessGame object that will house all of our logic and variables.
-var wordGuessGame = {
 
-    // Object of all words that can be chosen, along with info such as their picture and a song clip.
+var wordGuessGame = {
     wordsToPick: {
       genesis: {
         picture: "genesis.jpg",
@@ -69,28 +67,24 @@ var wordGuessGame = {
     letterGuessed: null,
     wins: 0,
 
-      // The setupGame method is called when the page first loads.
+    
   setupGame: function() {
-    // Here we pick a random word.
+  
     var objKeys = Object.keys(this.wordsToPick);
     this.wordInPlay = objKeys[Math.floor(Math.random() * objKeys.length)];
-
-    // Split the chosen word up into its individual letters.
     this.lettersOfTheWord = this.wordInPlay.split("");
-    // Builds the representation of the word we are trying to guess and displays it on the page.
-    // At the start it will be all underscores since we haven't guessed any letters ("_ _ _ _").
     this.rebuildWordView();
+
     // This function sets the number of guesses the user gets, and renders it to the HTML.
     this.processUpdateTotalGuesses();
   },
 
     // This function is run whenever the user guesses a letter..
     updatePage: function(letter) {
-        // If the user has no guesses left, restart the game.
         if (this.guessesLeft === 0) {
           this.restartGame();
         }
-        // Otherwise...
+        // Else
         else {
           // Check for and handle incorrect guesses.
           this.updateGuesses(letter);
@@ -148,11 +142,10 @@ updateMatchedLetters: function(letter) {
   }
 },
  // This function builds the display of the word that is currently being guessed.
-  // For example, if we are trying to guess "blondie", it might display "bl_ndi_".
+
   rebuildWordView: function() {
     // We start with an empty string.
     var wordView = "";
-
     // Loop through the letters of the word we are trying to guess..
     for (var i = 0; i < this.lettersOfTheWord.length; i++) {
       // If the current letter has been guessed, display that letter.
