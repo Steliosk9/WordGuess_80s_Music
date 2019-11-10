@@ -183,3 +183,57 @@ updateMatchedLetters: function(letter) {
     this.setupGame();
     this.rebuildWordView();
   },
+  updateWins: function() {
+    var win;
+
+    // this won't work for words with double or triple letters
+    // var lettersOfTheWordClone = this.lettersOfTheWord.slice(); //clones the array
+    // this.matchedLetters.sort().join('') == lettersOfTheWordClone.sort().join('')
+
+    // If you haven't correctly guessed a letter in the word yet, we set win to false.
+    if (this.matchedLetters.length === 0) {
+      win = false;
+    }
+    // Otherwise, we set win to true.
+    else {
+      win = true;
+    }
+
+    // If a letter appears in the lettersOfTheWord array, but not in the matchedLetters array, set win to false.
+    // In English, if you haven't yet guessed all the letters in the word, you don't win yet.
+    for (var i = 0; i < this.lettersOfTheWord.length; i++) {
+      if (this.matchedLetters.indexOf(this.lettersOfTheWord[i]) === -1) {
+        win = false;
+      }
+    }
+
+    // If win is true...
+    if (win) {
+
+      // Increment wins.
+      this.wins = this.wins + 1;
+
+      // Update wins on the page.
+      document.querySelector("#wins").innerHTML = this.wins;
+
+      // Update the song title and band on the page.
+      document.querySelector("#music").innerHTML = this.wordsToPick[this.wordInPlay].song +
+      " By " + this.wordInPlay;
+
+      // Update the image of the band on the page.
+      document.querySelector("#band-div").innerHTML =
+        "<img class='band-image' src='../images/" +
+        this.wordsToPick[this.wordInPlay].picture + "' alt='" +
+        this.wordsToPick[this.wordInPlay].song + "'>";
+
+      // Play an audio track of the band.
+      var audio = new Audio(this.wordsToPick[this.wordInPlay].preview);
+      audio.play();
+
+      // return true, which will trigger the restart of our game in the updatePage function.
+      return true;
+    }
+    // If win is false, return false to the updatePage function. The game goes on!
+    return false;
+  }
+};
