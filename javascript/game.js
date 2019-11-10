@@ -237,3 +237,18 @@ updateMatchedLetters: function(letter) {
     return false;
   }
 };
+
+// Initialize the game when the page loads.
+wordGuessGame.setupGame();
+
+// When a key is pressed..
+document.onkeyup = function(event) {
+  // Check if the key pressed is a letter.
+  if (event.keyCode >= 49 && event.keyCode <= 90) {
+    // Capture pressed key and make it lowercase.
+    wordGuessGame.letterGuessed = event.key.toLowerCase();
+    // Pass the guessed letter into our updatePage function to run the game logic.
+    wordGuessGame.updatePage(wordGuessGame.letterGuessed);
+  }
+  
+};
