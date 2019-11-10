@@ -135,7 +135,7 @@ var wordGuessGame = {
     // Render the guesses left to the page.
     document.querySelector("#guesses-remaining").innerHTML = this.guessesLeft;
   },
-  
+
 // This function governs what happens if the user makes a successful guess.
 updateMatchedLetters: function(letter) {
   // Loop through the letters of the "solution".
@@ -147,3 +147,24 @@ updateMatchedLetters: function(letter) {
     }
   }
 },
+ // This function builds the display of the word that is currently being guessed.
+  // For example, if we are trying to guess "blondie", it might display "bl_ndi_".
+  rebuildWordView: function() {
+    // We start with an empty string.
+    var wordView = "";
+
+    // Loop through the letters of the word we are trying to guess..
+    for (var i = 0; i < this.lettersOfTheWord.length; i++) {
+      // If the current letter has been guessed, display that letter.
+      if (this.matchedLetters.indexOf(this.lettersOfTheWord[i]) !== -1) {
+        wordView += this.lettersOfTheWord[i];
+      }
+      // If it hasn't been guessed, display a "_" instead.
+      else {
+        wordView += "&nbsp;_&nbsp;";
+      }
+    }
+
+    // Update the page with the new string we built.
+    document.querySelector("#current-word").innerHTML = wordView;
+  },
