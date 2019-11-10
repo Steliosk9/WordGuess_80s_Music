@@ -125,3 +125,14 @@ var wordGuessGame = {
       this.guessedLetters.join(", ");
     }
   },
+  
+  // This function sets the initial guesses the user gets.
+  processUpdateTotalGuesses: function() {
+    // The user will get more guesses the longer the word is.
+    this.totalGuesses = this.lettersOfTheWord.length + 5;
+    this.guessesLeft = this.totalGuesses;
+
+    // Render the guesses left to the page.
+    document.querySelector("#guesses-remaining").innerHTML = this.guessesLeft;
+  },
+
