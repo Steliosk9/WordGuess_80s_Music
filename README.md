@@ -12,4 +12,6 @@ have no more lifes,or you guessed the artist name. Good Luck !!!
 
 
 
+---
 permalink: /index.html
+---
