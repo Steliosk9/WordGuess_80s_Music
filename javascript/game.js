@@ -215,7 +215,7 @@ updateMatchedLetters: function(letter) {
 
       // Update the image of the band on the page.
       document.querySelector("#band-div").innerHTML =
-        "<img class='band-image' src='../images/" +
+        "<img class='band-image' src='./images/" +
         this.wordsToPick[this.wordInPlay].picture + "' alt='" +
         this.wordsToPick[this.wordInPlay].song + "'>";
 
