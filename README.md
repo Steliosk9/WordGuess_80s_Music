@@ -11,7 +11,3 @@ have no more lifes,or you guessed the artist name. Good Luck !!!
 ![](./images/Capture.JPG)
 
 
-
----
-permalink: /index.html
----
